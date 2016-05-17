@@ -101,7 +101,6 @@ app.get('*', async (req, res, next) => {
         setMeta: (key, value) => (data[key] = value),
       },
       render(component, status = 200) {
-        console.dir(data);
         css = [];
         statusCode = status;
         data.body = ReactDOM.renderToString(component);
