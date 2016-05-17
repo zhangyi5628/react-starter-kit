@@ -54,6 +54,7 @@ app.use(expressJwt({
 }));
 app.use(passport.initialize());
 
+/*
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
 );
@@ -66,7 +67,7 @@ app.get('/login/facebook/return',
     res.redirect('/');
   }
 );
-
+*/
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
@@ -100,6 +101,7 @@ app.get('*', async (req, res, next) => {
         setMeta: (key, value) => (data[key] = value),
       },
       render(component, status = 200) {
+        console.dir(data);
         css = [];
         statusCode = status;
         data.body = ReactDOM.renderToString(component);

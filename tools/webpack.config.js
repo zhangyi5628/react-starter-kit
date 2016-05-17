@@ -117,6 +117,10 @@ const config = {
         test: /\.jade$/,
         loader: 'jade-loader',
       },
+      {
+        test: /\.hbs/,
+        loader: "handlebars-loader"
+      }
     ],
   },
 
