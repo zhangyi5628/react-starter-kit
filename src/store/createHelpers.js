@@ -17,7 +17,9 @@ function createGraphqlRequest(fetchKnowingCookie) {
   };
 }
 
-function createFetchKnowingCookie({ cookie }) {
+function createFetchKnowingCookie(params = {}) {
+  const {cookie: cookie = ""} = params;
+
   if (!process.env.BROWSER) {
     return (url, options = {}) => {
       const isLocalUrl = /^\/($|[^\/])/.test(url);
