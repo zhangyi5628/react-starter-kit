@@ -87,6 +87,7 @@ app.get('*', async (req, res, next) => {
     let css = [];
     let statusCode = 200;
     const template = require('./views/index.jade');
+    const hbs_template = require('./views/index.hbs');
     const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
 
     if (process.env.NODE_ENV === 'production') {
@@ -112,6 +113,12 @@ app.get('*', async (req, res, next) => {
         setMeta: (key, value) => (data[key] = value),
       },
       render(component, status = 200) {
+        console.log("server render");
+        //console.log(component);
+        //console.log("----------");
+        //console.log(req.path);
+        //console.log("----------");
+        //console.log(req.query);
         css = [];
         statusCode = status;
         data.state = JSON.stringify(store.getState());
@@ -122,6 +129,7 @@ app.get('*', async (req, res, next) => {
     });
 
     res.status(statusCode);
+    //res.send(hbs_template());
     res.send(template(data));
   } catch (err) {
     next(err);

@@ -53,9 +53,15 @@ class App extends Component {
   }
 
   render() {
+    console.log("--- App render ---");
+
     if (this.props.error) {
+      console.log("----App error----");
       return this.props.children;
     }
+
+
+    console.log(this.props.children);
 
     const store = this.props.context.store;
     return (
