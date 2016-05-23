@@ -60,8 +60,8 @@ plazas {
       credentials: 'include',
     });
     const {data} = await resp.json();
-    if (!data || !data.news) throw new Error('Failed to load the news feed.');
-    return <Home news={data.news}/>;
+    if (!data || !data.plazas) throw new Error('Failed to load the news feed.');
+    return <Home plazas={data.plazas.data}/>;
   },
 
 };

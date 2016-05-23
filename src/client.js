@@ -18,7 +18,7 @@ import { addEventListener, removeEventListener } from './core/DOMUtils';
 
 const context = {
   store: null,
-  insertCss: styles => styles._insertCss(),
+  insertCss: styles => styles._insertCss(), // eslint-disable-line no-underscore-dangle
   setTitle: value => (document.title = value),
   setMeta: (name, content) => {
     // Remove and create a new <meta /> tag in order to make it work
@@ -64,8 +64,8 @@ let renderComplete = (state, callback) => {
 
 function render(container, state, component) {
   return new Promise((resolve, reject) => {
-    console.log("client render");
-    console.log(component);
+    console.log("--- client render ---");
+    //console.log(component);
     try {
       ReactDOM.render(
         component,
@@ -90,7 +90,7 @@ function run() {
   // Make taps on links and buttons work fast on mobiles
   FastClick.attach(document.body);
 
-  context.store = configureStore(initialState);
+  context.store = configureStore(initialState, {});
 
   // Re-render the app when window.location changes
   const removeHistoryListener = history.listen(location => {

@@ -35,10 +35,7 @@ export default {
     const component = await next();
     if (component === undefined) return component;
     console.log("--- routes/index ---");
-    //console.log(next);
-    //console.log("++++++");
-    //console.log(context);
-    console.log(component);
+    //console.log(component);
     return render(
       <App context={context}>{component}</App>
     );

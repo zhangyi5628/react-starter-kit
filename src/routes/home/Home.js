@@ -9,7 +9,7 @@
 
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.scss';
+import s from './Home.css';
 
 const title = 'React Starter Kit';
 
@@ -35,21 +35,36 @@ const title = 'React Starter Kit';
 //  );
 //}
 
-function Home({ news }, context) {
+function Home({ plazas }, context) {
   context.setTitle(title);
   console.log("----Home-----");
+  //console.log(plazas);
   return (
-    <ul>
-      <li>Home</li>
-    </ul>
+    <div className={s.root}>
+      <div className={s.container}>
+        <h1 className={s.title}>React.js News</h1>
+        <ul className={s.plazas}>
+          {plazas.map((item, index) => (
+            <li key={index} className={s.newsItem}>
+              <div>{item.plazaId}</div>
+              <div>{item.plazaName}</div>
+              <div>{item.address}</div>
+              <div>{item.entGroupName}</div>
+              <hr/>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
 Home.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    contentSnippet: PropTypes.string,
+  plazas: PropTypes.arrayOf(PropTypes.shape({
+    plazaId: PropTypes.number.isRequired,
+    plazaName: PropTypes.string.isRequired,
+    address: PropTypes.string,
+    entGroupName: PropTypes.string,
   })).isRequired,
 };
 Home.contextTypes = { setTitle: PropTypes.func.isRequired };
