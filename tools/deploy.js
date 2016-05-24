@@ -14,9 +14,9 @@ import fetch from './lib/fetch';
 // TODO: Update deployment URL
 // For more information visit http://gitolite.com/deploy.html
 const getRemote = (slot) => ({
-  name: slot || 'production',
-  url: `https://example${slot ? `-${slot}` : ''}.scm.azurewebsites.net:443/example.git`,
-  website: `http://example${slot ? `-${slot}` : ''}.azurewebsites.net`,
+  name: slot || '',
+  url: `http://10.77.144.192:11824/web-fe/ffan-web.git`,
+  website: `http://newh5.${slot ? `${slot}.` : ''}ffan.com`,
 });
 
 /**
@@ -25,7 +25,7 @@ const getRemote = (slot) => ({
  */
 async function deploy() {
   // By default deploy to the staging deployment slot
-  const remote = getRemote(process.argv.includes('--production') ? null : 'staging');
+  const remote = getRemote(process.argv.includes('--production') ? null : 'sit');
 
   // Initialize a new Git repository inside the `/build` folder
   // if it doesn't exist yet
