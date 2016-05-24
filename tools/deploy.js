@@ -13,11 +13,13 @@ import fetch from './lib/fetch';
 
 // TODO: Update deployment URL
 // For more information visit http://gitolite.com/deploy.html
-const getRemote = (slot) => ({
+const getRemote = (slot) => {
+  const website  = `http://newh5.${slot ? `${slot}.` : ''}ffan.com`;
+  return {
   name: slot || '',
-  url: `http://10.77.144.192:11824/web-fe/ffan-web.git`,
-  website: `http://newh5.${slot ? `${slot}.` : ''}ffan.com`,
-});
+  url: `git@10.77.144.192:web-fe/ffan-web.git`,
+  website,
+}};
 
 /**
  * Deploy the contents of the `/build` folder to a remote
@@ -42,16 +44,20 @@ async function deploy() {
   // Build the project in RELEASE mode which
   // generates optimized and minimized bundles
   process.argv.push('--release');
-  await run(require('./build'));
 
-  // Push the contents of the build folder to the remote server via Git
-  await repo.add('--all .');
-  await repo.commit('Update');
-  await repo.push(remote.name, 'master');
-
-  // Check if the site was successfully deployed
-  const response = await fetch(remote.website);
-  console.log(`${remote.website} -> ${response.statusCode}`);
+  try {
+    await run(require('./build'));
+    // Push the contents of the build folder to the remote server via Git
+    await repo.add('--all .');
+    await repo.commit('Update');
+    await repo.push(remote.name, 'master');
+    // Check if the site was successfully deployed
+    const response = await fetch(remote.website);
+    console.log(`${remote.website} -> ${response.statusCode}`);
+  } catch (e) {
+    console.log('-- deploy error --');
+    console.log(e);
+  }
 }
 
 export default deploy;
