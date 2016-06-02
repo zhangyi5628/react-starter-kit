@@ -22,6 +22,7 @@ async function copy({ watch } = {}) {
   await Promise.all([
     ncp('src/public', 'build/public'),
     ncp('src/content', 'build/content'),
+    ncp('scripts', 'build/scripts'),
   ]);
 
   await fs.writeFile('./build/package.json', JSON.stringify({
@@ -30,6 +31,7 @@ async function copy({ watch } = {}) {
     dependencies: pkg.dependencies,
     scripts: {
       start: 'node server.js',
+      preinstall: "scl enable devtoolset-3 bash; bash ./scripts/load_node_gyp.bash; npm install sqlite3 --build-from-source",
     },
   }, null, 2));
 
