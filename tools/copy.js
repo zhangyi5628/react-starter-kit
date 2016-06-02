@@ -29,9 +29,12 @@ async function copy({ watch } = {}) {
     private: true,
     engines: pkg.engines,
     dependencies: pkg.dependencies,
+    optionalDependencies: pkg.optionalDependencies,
     scripts: {
       start: 'node server.js',
-      preinstall: "scl enable devtoolset-3 bash; bash ./scripts/load_node_gyp.bash; npm install sqlite3 --build-from-source",
+      init_gyp: "bash ./scripts/load_node_gyp.bash;",
+      install_db: "npm install sqlite3 --build-from-source",
+      preinstall: "npm run init_gyp & npm run install_db",
     },
   }, null, 2));
 

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-scl enable devtoolset-3 bash
-
 # 获得 nodejs 版本号
 NODE_VERSION=`node -v | cut -d'v' -f 2`
 
