@@ -86,8 +86,7 @@ app.get('*', async (req, res, next) => {
   try {
     let css = [];
     let statusCode = 200;
-    //const template = require('./views/index.jade');
-    const hbs_template = require('./views/index.hbs');
+    //const hbs_template = require('./views/index.hbs');
     const template = require('./views/index.jade'); // eslint-disable-line global-require
     const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
 

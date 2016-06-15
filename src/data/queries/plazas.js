@@ -32,6 +32,7 @@ const plazas = {
       .then(res=> res.json())
       .then(json => json)
       .catch(err => {
+        console.log("-- fetch error --");
         console.log(err);
       });
   },
