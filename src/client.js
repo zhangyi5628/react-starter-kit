@@ -64,8 +64,6 @@ let renderComplete = (state, callback) => {
 
 function render(container, state, component) {
   return new Promise((resolve, reject) => {
-    console.log("--- client render ---");
-    //console.log(component);
     try {
       ReactDOM.render(
         component,
